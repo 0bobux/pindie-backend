@@ -14,4 +14,4 @@ function cors(req, res, next) {
     next(); // Идём дальше, не задерживаем очередь
 }
 
-module.exports = cors;
+module.exports = { cors };
