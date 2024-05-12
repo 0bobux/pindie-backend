@@ -50,4 +50,47 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-module.exports = findAllUsers, createUser, findUserById, updateUser, deleteUser; 
+const checkEmptyNameAndEmailAndPassword = async (req, res, next) => {
+  if (
+    !req.body.username ||
+    !req.body.email ||
+    !req.body.password
+  ) {
+    // Если какое-то из полей отсутствует, то не будем обрабатывать запрос дальше,
+    // а ответим кодом 400 — данные неверны.
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Заполни все поля" }));
+  } else {
+    // Если всё в порядке, то передадим управление следующим миддлварам
+    next();
+  }
+};
+
+const checkEmptyNameAndEmail = async (req, res, next) => {
+  if (
+    !req.body.username ||
+    !req.body.email
+  ) {
+    // Если какое-то из полей отсутствует, то не будем обрабатывать запрос дальше,
+    // а ответим кодом 400 — данные неверны.
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Заполни все поля" }));
+  } else {
+    // Если всё в порядке, то передадим управление следующим миддлварам
+    next();
+  }
+};
+
+const checkIsUserExists = async (req, res, next) => {
+  const isInArray = req.usersArray.find((user) => {
+    return req.body.email === user.email;
+  });
+  if (isInArray) {
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Пользователь с таким email уже существует" }));
+  } else {
+    next();
+  }
+};
+
+module.exports = {findAllUsers, createUser, findUserById, updateUser, deleteUser, checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, checkIsUserExists}; 
