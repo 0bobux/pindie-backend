@@ -15,10 +15,17 @@ const sendUserUpdated = require("../controllers/users");
 const {deleteUser} = require("../middlewares/users");
 const sendUserDeleted = require("../controllers/users");
 
-const {checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, checkIsUserExists, filterPassword} = require("../middlewares/users")
+const {checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, checkIsUserExists, filterPassword, hashPassword} = require("../middlewares/users")
 
 usersRouter.get("/users", findAllUsers, filterPassword, sendAllUsers);
-usersRouter.post("/users", findAllUsers, checkEmptyNameAndEmailAndPassword, checkIsUserExists, createUser, sendUserCreated);
+usersRouter.post(
+    "/users", 
+    findAllUsers, 
+    checkEmptyNameAndEmailAndPassword, 
+    checkIsUserExists, 
+    hashPassword,
+    createUser, 
+    sendUserCreated);
 usersRouter.get("/users/:id", findUserById, filterPassword, sendUserById);
 usersRouter.put(
     "/users/:id", // Слушаем запросы по эндпоинту
