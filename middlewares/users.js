@@ -93,4 +93,18 @@ const checkIsUserExists = async (req, res, next) => {
   }
 };
 
-module.exports = {findAllUsers, createUser, findUserById, updateUser, deleteUser, checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, checkIsUserExists}; 
+const filterPassword = (req, res, next) => {
+  const filterUser = (user) => {
+    const { password, ...userWithoutPassword } = user.toObject();
+    return userWithoutPassword;
+  };
+  if (req.user) {
+    req.user = filterUser(req.user);
+  }
+  if (req.usersArray) {
+    req.usersArray = req.usersArray.map((user) => filterUser(user));
+  }
+  next();
+};
+
+module.exports = {findAllUsers, createUser, findUserById, updateUser, deleteUser, checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, checkIsUserExists, filterPassword}; 
