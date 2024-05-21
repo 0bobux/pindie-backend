@@ -15,7 +15,7 @@ const sendGameUpdated = require("../controllers/games");
 const {deleteGame} = require("../middlewares/games");
 const sendGameDeleted = require("../controllers/games");
 
-const {checkEmptyFields, checkIfUsersAreSafe, checkIfCategoriesAvaliable, checkIsGameExists} = require("../middlewares/games")
+const {checkEmptyFields, checkIfUsersAreSafe, checkIfCategoriesAvaliable, checkIsGameExists, checkIsVoteRequest} = require("../middlewares/games")
 const { checkAuth } = require("../middlewares/auth.js");
 
 gamesRouter.get("/games", findAllGames, sendAllGames);
@@ -24,7 +24,7 @@ gamesRouter.get("/games/:id", findGameById, sendGameById);
 gamesRouter.put(
     "/games/:id", // Слушаем запросы по эндпоинту
     findGameById,// Шаг 1. Находим игру по id из запроса
-    //checkIsVoteRequest, // Шаг 2. Выполняем проверки для корректного обновления (опционально)
+    checkIsVoteRequest, // Шаг 2. Выполняем проверки для корректного обновления (опционально)
     checkIfUsersAreSafe,
     checkIfCategoriesAvaliable,
     checkEmptyFields,
