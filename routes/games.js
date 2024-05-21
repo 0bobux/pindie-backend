@@ -19,7 +19,16 @@ const {checkEmptyFields, checkIfUsersAreSafe, checkIfCategoriesAvaliable, checkI
 const { checkAuth } = require("../middlewares/auth.js");
 
 gamesRouter.get("/games", findAllGames, sendAllGames);
-gamesRouter.post("/games", findAllGames, checkIsGameExists, checkIfCategoriesAvaliable, checkEmptyFields, checkAuth, createGame, sendGameCreated);
+gamesRouter.post(
+  "/games", 
+  findAllGames, 
+  checkIsGameExists, 
+  checkIfCategoriesAvaliable, 
+  checkEmptyFields, 
+  checkAuth, 
+  createGame, 
+  sendGameCreated
+);
 gamesRouter.get("/games/:id", findGameById, sendGameById);
 gamesRouter.put(
     "/games/:id", // Слушаем запросы по эндпоинту
