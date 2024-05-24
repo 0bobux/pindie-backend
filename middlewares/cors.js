@@ -1,12 +1,7 @@
 const allowedCors = [
-    'https://practicum.yandex.ru',
-    'https://students-projects.ru',
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://backend-8-bobux.nomoredomainswork.ru',
-    'https://frontend-8-bobux.nomoredomainswork.ru',
-    'http://backend-8-bobux.nomoredomainswork.ru',
-    'http://frontend-8-bobux.nomoredomainswork.ru'
+    'https://frontend-8-bobux.nomoredomainswork.ru'
 ];
 
 function cors(req, res, next) {
