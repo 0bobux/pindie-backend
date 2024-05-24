@@ -1,7 +1,10 @@
 const allowedCors = [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://frontend-8-bobux.nomoredomainswork.ru'
+    'https://frontend-8-bobux.nomoredomainswork.ru',
+    'http://frontend-8-bobux.nomoredomainswork.ru',
+    'https://backend-8-bobux.nomoredomainswork.ru',
+    'http://backend-8-bobux.nomoredomainswork.ru'
 ];
 
 function cors(req, res, next) {
@@ -12,6 +15,7 @@ function cors(req, res, next) {
     }
     res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
+    
     next();
 }
 
