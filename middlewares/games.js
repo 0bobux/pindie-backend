@@ -114,6 +114,7 @@ if (req.body.users.length - 1 === req.game.users.length) {
 const checkIsGameExists = async (req, res, next) => {
   const isInArray = req.gamesArray.find((game) => {
     return req.body.name === game.name;
+    
   });
   if (isInArray) {
     res.setHeader("Content-Type", "application/json");
